@@ -1,0 +1,27 @@
+{
+  "name": "webbramverkprojekt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdamWendell/webbramverkprojekt.git"
+  },
+  "author": "Adam Wendell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AdamWendell/webbramverkprojekt/issues"
+  },
+  "homepage": "https://github.com/AdamWendell/webbramverkprojekt#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "webpack": "^1.12.15",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
