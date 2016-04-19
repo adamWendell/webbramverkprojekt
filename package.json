@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/AdamWendell/webbramverkprojekt#readme",
   "dependencies": {
+    "express": "^4.13.4",
+    "socket.io": "^1.4.5"
   },
   "devDependencies": {
     "webpack": "^1.12.15",
