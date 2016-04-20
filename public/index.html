@@ -5,6 +5,9 @@
     <title>kett</title>
   </head>
   <body>
+    <div id="container">
+
+    </div>
     <form onSubmit="return processForm()">
       <input id="m" autocomplete="off" />
       <button>Send</button>
@@ -12,20 +15,29 @@
     <ul id="messages">
 
     </ul>
-  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  <script src="http://localhost:3000/socket.io/socket.io.js "></script>
+
   <script>
-  var socket = io();
+  var socket = io.connect('http://localhost:3000');
+
   var m = document.getElementById('m');
   function processForm() {
-    socket.emit('chat', m.value);
+    socket.emit('chat', {
+      msg: m.value,
+      room: 'general',
+      user: 'adam'
+    });
     m.value = ''
     return false;
   }
+  console.log(socket);
+  socket.on('fetchMsgs', (x) => console.log(x))
   socket.on('chat', function(msg){
     var li = document.createElement('li');
     li.innerHTML = msg;
     document.getElementById('messages').appendChild(li);
   })
 </script>
+<script src="/js/bundle.js" charset="utf-8"></script>
   </body>
 </html>
