@@ -31,7 +31,9 @@ io.on('connection', function (socket) {
   socket.on('getRooms', function () {
     Rooms.find({}, 'room',(err, rooms) => {
       if (err) console.error(err)
-      console.log(rooms)
+      var roomsArr = rooms.map(obj => obj.room)
+      console.log(roomsArr)
+      // io.to(socket.id).emit('getRooms',)
     })
   })
   socket.on('changeRoom', function (data) {
