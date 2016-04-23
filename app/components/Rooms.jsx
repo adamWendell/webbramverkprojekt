@@ -1,24 +1,25 @@
-import React, { PropTypes } from 'react'
+/* global socket */
+import React from 'react'
 
 class Rooms extends React.Component {
   constructor (props) {
     super()
     this.state = {
-      rooms:[]
+      rooms: []
     }
   }
-  getRooms(){
-    socket.emit('getRooms', '')
-    socket.on('getRooms', roomsArr => {
-      this.setState({rooms: this.state.rooms.concat(roomsArr))
-    })
-  }
-  render () {
-    <nav>
-      <ul>
 
-      </ul>
-    </nav>
+
+
+  render () {
+    var rooms = this.props.rooms.map(room => <li onClick={this.props.joinRoom}>{room}</li>)
+    return (
+      <nav>
+        <ul>
+          {rooms}
+        </ul>
+      </nav>
+    )
   }
 }
 

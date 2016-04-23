@@ -7,12 +7,31 @@ var roomsSchema = {
 var MsgSchema = {
   author: String,
   time: String,
-  room: String
+  room: String,
+  message: String
 }
 
 var Rooms = mongoose.model('Rooms', roomsSchema)
 var Msgs = mongoose.model('Msgs', MsgSchema)
 
+// for (var i = 0; i < 50000; i++) {
+//   if (i % 3 === 0) {
+//     Msgs.create({room: 'random', author: 'Me', time: Date.now(), message: `this is the ${i} message`}, (err, newRoom) => {
+//       if (err) return console.error(err)
+//       console.log(newRoom)
+//     })
+//   } else if (i % 2 === 0) {
+//     Msgs.create({room: 'general', author: 'Me', time: Date.now(), message: `this is the ${i} message`}, (err, newRoom) => {
+//       if (err) return console.error(err)
+//       console.log(newRoom)
+//     })
+//   } else {
+//     Msgs.create({room: 'cats', author: 'Me', time: Date.now(), message: `this is the ${i} message`}, (err, newRoom) => {
+//       if (err) return console.error(err)
+//       console.log(newRoom)
+//     })
+//   }
+// }
 // Rooms.create({room:'general'}, (err, newRoom) => {
 //   if (err) return console.error(err)
 //   console.log(newRoom)

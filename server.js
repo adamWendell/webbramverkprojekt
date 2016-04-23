@@ -8,7 +8,8 @@ var Msgs = require('./src/mongooseSetup.js').Msgs
 // console.log(Msgs);
 var messages = [
   {room: 'general', messages: ['first general', 'second general']},
-  {room: 'cats', messages: ['first', 'second']}
+  {room: 'cats', messages: ['first', 'second']},
+  {room: 'random', messages: ['first random', 'second random']}
 ]
 
 app.use(express.static('public'))
@@ -33,7 +34,7 @@ io.on('connection', function (socket) {
       if (err) console.error(err)
       var roomsArr = rooms.map(obj => obj.room)
       console.log(roomsArr)
-      // io.to(socket.id).emit('getRooms',)
+      io.to(socket.id).emit('getRooms', roomsArr)
     })
   })
   socket.on('changeRoom', function (data) {
