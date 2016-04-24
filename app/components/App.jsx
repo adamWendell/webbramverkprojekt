@@ -1,6 +1,7 @@
 import React from 'react'
 import MessageList from './MessageList.jsx'
 import Rooms from './Rooms.jsx'
+import WriteMsg from './WriteMsg.jsx'
 
 class App extends React.Component {
   constructor (props) {
@@ -41,6 +42,7 @@ class App extends React.Component {
       <div>
         <Rooms joinRoom={this.joinRoom} rooms={this.state.rooms} currentRoom={this.state.currentRoom} logger={this.logger} />
         <MessageList joinRoom={this.joinRoom} />
+        <WriteMsg />
       </div>
     )
   }
