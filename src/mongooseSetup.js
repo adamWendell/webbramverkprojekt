@@ -8,7 +8,8 @@ var MsgSchema = {
   author: String,
   time: String,
   room: String,
-  message: String
+  message: String,
+  edited: Boolean
 }
 
 var Rooms = mongoose.model('Rooms', roomsSchema)

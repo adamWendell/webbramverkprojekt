@@ -1,10 +1,23 @@
 import React from 'react'
 
 class WriteMsg extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  handleSubmit (e) {
+    e.preventDefault()
+    socket.emit('chat', {
+      msg: this.refs.message.value,
+      author: this.refs.author.value
+    });
+  }
   render () {
     return (
-      <form>
-        <textarea></textarea>
+      <form onSubmit={this.handleSubmit}>
+        <input ref='author' placeholder='author'></input>
+        <br />
+        <textarea ref='message'></textarea>
         <br />
         <button>Send</button>
       </form>

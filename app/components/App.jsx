@@ -9,14 +9,14 @@ class App extends React.Component {
     this.state = {
       rooms: [],
       currentRoom: 'general',
-      MsgsInRoom: []
+      msgsInRoom: []
     }
     this.getRooms = this.getRooms.bind(this)
     this.joinRoom = this.joinRoom.bind(this)
   }
   componentWillMount () {
     socket.emit('changeRoom', this.state.currentRoom)
-    socket.on('chat', msg => this.setState({messages: this.state.messages.concat(msg.msg)}))
+    socket.on('chat', msg => this.setState({msgsInRoom: this.state.msgsInRoom.concat(msg)}))
     socket.on('fetchMsgs', (x) => {
       var newMsgState = x
         .reduce((state, newMsg) => { return state.concat(newMsg) }, [])

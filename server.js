@@ -24,8 +24,9 @@ io.on('connection', function (socket) {
   console.log(socket.id)
 
   socket.on('chat', function (msg) {
-    console.log(socket.room)
-    messages.filter(roomObj => roomObj.room === socket.room)
+    msg.room = socket.room
+    msg.time = '' + Date.now()
+    msg.edited = false
     console.log(msg)
     io.emit('chat', msg)
   })
