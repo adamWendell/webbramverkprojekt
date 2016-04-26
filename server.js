@@ -28,7 +28,11 @@ io.on('connection', function (socket) {
     msg.time = '' + Date.now()
     msg.edited = false
     console.log(msg)
-    io.emit('chat', msg)
+    Msgs.create(msg, (err, newMsg) => {
+      if (err) return console.error(err)
+      console.log(newMsg)
+      io.emit('chat', newMsg)
+    })
   })
   socket.on('getRooms', function () {
     Rooms.find({}, 'room',(err, rooms) => {
@@ -41,12 +45,18 @@ io.on('connection', function (socket) {
   socket.on('changeRoom', function (data) {
     socket.room = data
     socket.join(data)
+    Msgs.find({room: data}).sort({$natural:-1}).limit(25).exec((err, messages) =>{
+      console.log(messages.reverse())
     io.to( socket.id ).emit('fetchMsgs', messages
       .filter(roomObj => roomObj.room === socket.room)
-      .map(obj => obj.messages)
-      .reduce((pre, cur) => { pre.concat(cur) }))
+    )
+
+
+    })
   })
 })
+
+
 
 http.listen(3000, function () {
   console.log('listening on *:3000')

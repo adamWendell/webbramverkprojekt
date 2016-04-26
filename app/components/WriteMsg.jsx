@@ -8,7 +8,7 @@ class WriteMsg extends React.Component {
   handleSubmit (e) {
     e.preventDefault()
     socket.emit('chat', {
-      msg: this.refs.message.value,
+      message: this.refs.message.value,
       author: this.refs.author.value
     });
   }

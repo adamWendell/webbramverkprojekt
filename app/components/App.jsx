@@ -20,7 +20,7 @@ class App extends React.Component {
     socket.on('fetchMsgs', (x) => {
       var newMsgState = x
         .reduce((state, newMsg) => { return state.concat(newMsg) }, [])
-      this.setState({messages: newMsgState})
+      this.setState({msgsInRoom: newMsgState})
     })
     this.getRooms()
   }
@@ -41,7 +41,7 @@ class App extends React.Component {
     return (
       <div>
         <Rooms joinRoom={this.joinRoom} rooms={this.state.rooms} currentRoom={this.state.currentRoom} logger={this.logger} />
-        <MessageList joinRoom={this.joinRoom} />
+        <MessageList joinRoom={this.joinRoom} messages={this.state.msgsInRoom}/>
         <WriteMsg />
       </div>
     )
