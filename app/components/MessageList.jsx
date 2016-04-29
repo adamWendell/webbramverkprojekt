@@ -7,15 +7,16 @@ class MessageList extends React.Component {
   }
 
   render () {
-    var messageNodes = this.props.messages.map((message, i) => {
-      console.log(message)
-      return (
-        <Message key={i} message={message} />
+    var messagesNodeList = this.props.messages
+      .filter(roomsWithMsgsObj => {
+        return roomsWithMsgsObj.room === this.props.currentRoom
+      })
+      .map(x => x.messages
+        .map((x, i) => <Message key={i} message={x} />)
       )
-    })
 
     return (
-      <div> {messageNodes} </div>
+      <div> {messagesNodeList} </div>
     )
   }
 }

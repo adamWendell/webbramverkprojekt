@@ -35,29 +35,43 @@ io.on('connection', function (socket) {
     })
   })
   socket.on('getRooms', function () {
-    Rooms.find({}, 'room',(err, rooms) => {
-      if (err) console.error(err)
-      var roomsArr = rooms.map(obj => obj.room)
-      console.log(roomsArr)
-      io.to(socket.id).emit('getRooms', roomsArr)
-    })
+    Msgs.find().distinct('room', (err, rooms) => io.to(socket.id).emit('getRooms', rooms.reverse()))
   })
   socket.on('changeRoom', function (data) {
     socket.room = data
     socket.join(data)
     Msgs.find({room: data}).sort({$natural:-1}).limit(25).exec((err, messages) =>{
-      console.log(messages.reverse())
-    io.to( socket.id ).emit('fetchMsgs', messages
-      .filter(roomObj => roomObj.room === socket.room)
-    )
-
-
+      io.to( socket.id ).emit('fetchMsgs', messages
+        .filter(roomObj => roomObj.room === socket.room)
+        .reverse()
+        .reduce((pre, cur) => {
+          pre.messages.push(cur)
+          return pre
+        }, {room: socket.room, messages: []})
+      )
     })
   })
+
+  socket.on('update', (data) => {
+    console.log(data._id);
+    Msgs.findOneAndUpdate({_id: data._id}, data, (err, updated) => io.emit('update', updated))
+  })
 })
-
-
-
+function updatePopularRoom () {
+  Msgs.mapReduce({
+      map: function () {
+        emit(this.room, 1)
+      },
+      reduce: function (key, vals) {
+        return Array.sum(vals)
+      },
+      verbose: true,
+      limit: 300,
+      sort: {$natural:-1},
+    }, (err, result, stats) => io.emit('mostPopularRoom', result)
+  )
+}
+setInterval(updatePopularRoom, 500)
 http.listen(3000, function () {
   console.log('listening on *:3000')
 })
