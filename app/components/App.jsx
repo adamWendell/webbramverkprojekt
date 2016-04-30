@@ -10,7 +10,6 @@ class App extends React.Component {
       rooms: [],
       currentRoom: 'general',
       msgsInRoom: [],
-      mostPopularRoom: []
     }
     this.getRooms = this.getRooms.bind(this)
     this.joinRoom = this.joinRoom.bind(this)
@@ -31,7 +30,7 @@ class App extends React.Component {
       }
     })
     socket.on('delete', this.deleteMsg)
-    socket.on('mostPopularRoom', result => this.setState({mostPopularRoom: result}))
+    socket.on('update', this.updateMsg)
     this.getRooms()
   }
   joinRoom (e) {
@@ -84,7 +83,7 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Rooms joinRoom={this.joinRoom} mostPopularRoom={this.state.mostPopularRoom} rooms={this.state.rooms} currentRoom={this.state.currentRoom}  />
+        <Rooms joinRoom={this.joinRoom} rooms={this.state.rooms} currentRoom={this.state.currentRoom}  />
         <MessageList joinRoom={this.joinRoom} currentRoom={this.state.currentRoom} messages={this.state.msgsInRoom}/>
         <WriteMsg />
       </div>
