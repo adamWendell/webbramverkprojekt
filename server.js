@@ -52,9 +52,9 @@ io.on('connection', function (socket) {
     })
   })
 
-  socket.on('update', (data) => {
-    console.log(data._id);
-    Msgs.findOneAndUpdate({_id: data._id}, data, (err, updated) => io.emit('update', updated))
+  socket.on('delete', (data) => {
+    console.log(data)
+    Msgs.findOneAndRemove({_id: data._id}, (err, removed) => io.emit('delete', removed))
   })
 })
 function updatePopularRoom () {

@@ -15,10 +15,12 @@ class App extends React.Component {
     this.getRooms = this.getRooms.bind(this)
     this.joinRoom = this.joinRoom.bind(this)
     this.handleNewMsg = this.handleNewMsg.bind(this)
-    this.handleMsgUpdate = this.handleMsgUpdate.bind(this)
+    this.handleMsgStateUpdates = this.handleMsgStateUpdates.bind(this)
     this.getIndexOfRoom = this.getIndexOfRoom.bind(this)
     this.getIndexOfRoom = this.getIndexOfRoom.bind(this)
     this.getIndexOfMsg = this.getIndexOfMsg.bind(this)
+    this.updateMsg = this.updateMsg.bind(this)
+    this.deleteMsg = this.deleteMsg.bind(this)
   }
   componentWillMount () {
     socket.emit('changeRoom', this.state.currentRoom)
@@ -28,7 +30,7 @@ class App extends React.Component {
         this.setState({msgsInRoom: this.state.msgsInRoom.concat(roomAndMsgObj)})
       }
     })
-    socket.on('update', this.handleMsgUpdate)
+    socket.on('delete', this.deleteMsg)
     socket.on('mostPopularRoom', result => this.setState({mostPopularRoom: result}))
     this.getRooms()
   }
@@ -57,15 +59,26 @@ class App extends React.Component {
   getIndexOfMsg (roomIndex, msgId) {
     return this.state.msgsInRoom[roomIndex].messages.findIndex(obj => obj._id === msgId)
   }
-  handleMsgUpdate (updatedMsg) {
+  handleMsgStateUpdates (updateOrDeletestr, updatedMsg) {
     console.log(updatedMsg)
     var roomIndex = this.getIndexOfRoom(updatedMsg.room)
     if (roomIndex >= 0) {
       var msgIndex = this.getIndexOfMsg(roomIndex, updatedMsg._id)
-      console.log(msgIndex)
+      var newMsgState = this.state.msgsInRoom
+      if (updateOrDeletestr == 'delete') {
+        newMsgState[roomIndex].messages.splice(msgIndex, 1)
+      } else if ( updateOrDeletestr == 'update') {
+        newMsgState[roomIndex].messages.splice(msgIndex, 1, updatedMsg)
+      }
+      this.setState({msgsInRoom: newMsgState})
     }
   }
-
+  updateMsg (msg) {
+    this.handleMsgStateUpdates('update', msg)
+  }
+  deleteMsg (msg) {
+    return this.handleMsgStateUpdates('delete', msg)
+  }
 
 
   render () {
