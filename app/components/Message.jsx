@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 
 class Message extends React.Component {
   constructor (props) {
@@ -12,7 +12,7 @@ class Message extends React.Component {
     this.deleteMessage = this.deleteMessage.bind(this)
   }
   deleteMessage () {
-    socket.emit('delete',  this.props.message)
+    socket.emit('delete', this.props.message)
   }
   updateMessage () {
     var updatedMsg = this.props.message
@@ -23,31 +23,39 @@ class Message extends React.Component {
     this.editHandler()
   }
   editHandler () {
-  this.setState({editing: !this.state.editing})
+    this.setState({editing: !this.state.editing})
   }
 
   elementHandler (editing) {
     var message = this.props.message
-    if(editing) {
-      return <div>
-        <p>{message.author}</p>
-        <input ref='update'defaultValue={message.message}></input>
+    if (editing) {
+      return <div className='message-container'>
+        <div className='message'>
+          <p className='author'>{message.author}</p>
+          <input className='message-text'ref='update'defaultValue={message.message}></input>
+        </div>
         <br />
-        <button onClick={this.deleteMessage}>delete</button>
-        <button onClick={this.updateMessage}>update</button>
+        <div  className='message-buttons'>
+          <button onClick={this.deleteMessage}>delete</button>
+          <button onClick={this.updateMessage}>update</button>
+        </div>
       </div>
     } else {
-      return <div>
-        <p>{message.author}</p>
-        <p>{message.message}</p>
+      return <div className='message-container'>
+        <div className='message'>
+          <p className='author'>{message.author}</p>
+          <p className='message-text'>{message.message}</p>
+        </div>
+        <div className='message-buttons'>
         <button onClick={this.deleteMessage}>delete</button>
         <button onClick={this.editHandler}>edit</button>
+        </div>
       </div>
     }
   }
   render () {
     return (
-      <div>
+      <div >
         {this.elementHandler(this.state.editing)}
       </div>
     )

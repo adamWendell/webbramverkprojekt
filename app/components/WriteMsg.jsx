@@ -10,7 +10,9 @@ class WriteMsg extends React.Component {
     socket.emit('chat', {
       message: this.refs.message.value,
       author: this.refs.author.value
-    });
+    })
+    this.refs.message.value = ''
+    this.refs.author.value = ''
   }
   render () {
     return (

@@ -9,7 +9,7 @@ class App extends React.Component {
     this.state = {
       rooms: [],
       currentRoom: 'general',
-      msgsInRoom: [],
+      msgsInRoom: []
     }
     this.getRooms = this.getRooms.bind(this)
     this.joinRoom = this.joinRoom.bind(this)
@@ -53,7 +53,7 @@ class App extends React.Component {
     }
   }
   getIndexOfRoom (searchRoom) {
-    return this.state.msgsInRoom.findIndex(obj => obj.room === searchRoom )
+    return this.state.msgsInRoom.findIndex(obj => obj.room === searchRoom)
   }
   getIndexOfMsg (roomIndex, msgId) {
     return this.state.msgsInRoom[roomIndex].messages.findIndex(obj => obj._id === msgId)
@@ -64,9 +64,9 @@ class App extends React.Component {
     if (roomIndex >= 0) {
       var msgIndex = this.getIndexOfMsg(roomIndex, updatedMsg._id)
       var newMsgState = this.state.msgsInRoom
-      if (updateOrDeletestr == 'delete') {
+      if (updateOrDeletestr === 'delete') {
         newMsgState[roomIndex].messages.splice(msgIndex, 1)
-      } else if ( updateOrDeletestr == 'update') {
+      } else if (updateOrDeletestr === 'update') {
         newMsgState[roomIndex].messages.splice(msgIndex, 1, updatedMsg)
       }
       this.setState({msgsInRoom: newMsgState})
@@ -79,12 +79,11 @@ class App extends React.Component {
     return this.handleMsgStateUpdates('delete', msg)
   }
 
-
   render () {
     return (
       <div>
-        <Rooms joinRoom={this.joinRoom} rooms={this.state.rooms} currentRoom={this.state.currentRoom}  />
-        <MessageList joinRoom={this.joinRoom} currentRoom={this.state.currentRoom} messages={this.state.msgsInRoom}/>
+        <Rooms joinRoom={this.joinRoom} rooms={this.state.rooms} currentRoom={this.state.currentRoom} />
+        <MessageList joinRoom={this.joinRoom} currentRoom={this.state.currentRoom} messages={this.state.msgsInRoom} />
         <WriteMsg />
       </div>
     )

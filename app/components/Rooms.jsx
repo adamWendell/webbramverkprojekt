@@ -14,8 +14,15 @@ class Rooms extends React.Component {
   render () {
     var sortedPopRoom = this.state.mostPopularRoom
       .reduce((pre, curr) => (pre[0].value > curr.value) ? pre : [curr], [{value: 0}])
-      .map((obj, i) => <p key={i+'mo'}>Most popular room for the last 300messages is {obj._id} with {Math.round(obj.value / 300 * 100)}% </p>)
-    var rooms = this.props.rooms.map((room, i) => <li key={i} onClick={this.props.joinRoom}>{room}</li>)
+      .map((obj, i) => <p key={i + 'mo'}>Most popular room for the last 300messages is {obj._id} with {Math.round(obj.value / 300 * 100)}% </p>)
+    var rooms = this.props.rooms
+      .map((room, i) => {
+        if (room === this.props.currentRoom) {
+          return <li key={i} className='selected' onClick={this.props.joinRoom}>{room}</li>
+        } else {
+          return <li key={i} onClick={this.props.joinRoom}>{room}</li>
+        }
+      })
     return (
       <nav>
         <ul>
@@ -27,4 +34,4 @@ class Rooms extends React.Component {
   }
 }
 
-export default Rooms;
+export default Rooms
