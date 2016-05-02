@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm i && nodemon server.js | webpack-dev-server --inline --content-base public/",
+    "start": "npm i && nodemon server.js | webpack-dev-server --inline --content-base public/ && open http://localhost:8080/",
     "build": "webpack"
   },
   "repository": {
@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/AdamWendell/webbramverkprojekt#readme",
   "dependencies": {
-    "eslint": "^2.8.0",
     "express": "^4.13.4",
     "mongoose": "^4.4.13",
     "react": "^15.0.1",
@@ -27,6 +26,7 @@
     "socket.io": "^1.4.5"
   },
   "devDependencies": {
+    "eslint": "^2.8.0",
     "babel-core": "^6.7.7",
     "babel-loader": "^6.2.4",
     "babel-polyfill": "^6.7.4",

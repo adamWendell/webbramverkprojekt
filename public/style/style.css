@@ -3,6 +3,7 @@ progress,sub,sup{vertical-align:baseline}button,hr,input{overflow:visible}html{f
 body {
   background: white;
   font-family: 'Open Sans', sans-serif;
+  padding-left: 20px;
 }
 nav li {
   width: 100px;

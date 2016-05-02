@@ -16,6 +16,7 @@ io.on('connection', function (socket) {
   console.log(socket.id)
 
   socket.on('chat', function (msg) {
+    msg.message =  msg.message.replace(/angular/gi, 'React')
     msg.room = socket.room
     msg.time = '' + Date.now()
     msg.edited = false

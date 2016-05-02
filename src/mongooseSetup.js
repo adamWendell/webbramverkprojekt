@@ -15,24 +15,19 @@ var MsgSchema = {
 var Rooms = mongoose.model('Rooms', roomsSchema)
 var Msgs = mongoose.model('Msgs', MsgSchema)
 
+// var arrayOfMessages = []
 // for (var i = 0; i < 50000; i++) {
 //   if (i % 3 === 0) {
-//     Msgs.create({room: 'random', author: 'Me', time: Date.now(), message: `this is the ${i} message`}, (err, newRoom) => {
-//       if (err) return console.error(err)
-//       console.log(newRoom)
-//     })
+//     arrayOfMessages.push({room: 'random', author: 'Me', time: Date.now(), message: `this is the ${i} message`})
 //   } else if (i % 2 === 0) {
-//     Msgs.create({room: 'general', author: 'Me', time: Date.now(), message: `this is the ${i} message`}, (err, newRoom) => {
-//       if (err) return console.error(err)
-//       console.log(newRoom)
-//     })
+//     arrayOfMessages.push({room: 'general', author: 'Me', time: Date.now(), message: `this is the ${i} message`})
 //   } else {
-//     Msgs.create({room: 'cats', author: 'Me', time: Date.now(), message: `this is the ${i} message`}, (err, newRoom) => {
-//       if (err) return console.error(err)
-//       console.log(newRoom)
-//     })
+//     arrayOfMessages.push({room: 'cats', author: 'Me', time: Date.now(), message: `this is the ${i} message`})
 //   }
 // }
+// Msgs.collection.insert(arrayOfMessages, (err, docs) => {
+//   if (err) console.error(err)
+// })
 // Rooms.create({room:'general'}, (err, newRoom) => {
 //   if (err) return console.error(err)
 //   console.log(newRoom)
