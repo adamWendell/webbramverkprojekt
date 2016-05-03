@@ -1,9 +1,6 @@
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/test')
 
-var roomsSchema = {
-  room: String
-}
 var MsgSchema = {
   author: String,
   time: String,
@@ -12,7 +9,6 @@ var MsgSchema = {
   edited: Boolean
 }
 
-var Rooms = mongoose.model('Rooms', roomsSchema)
 var Msgs = mongoose.model('Msgs', MsgSchema)
 
 // var arrayOfMessages = []
@@ -28,24 +24,11 @@ var Msgs = mongoose.model('Msgs', MsgSchema)
 // Msgs.collection.insert(arrayOfMessages, (err, docs) => {
 //   if (err) console.error(err)
 // })
-// Rooms.create({room:'general'}, (err, newRoom) => {
-//   if (err) return console.error(err)
-//   console.log(newRoom)
-// })
-// Rooms.create({room:'random'}, (err, newRoom) => {
-//   if (err) return console.error(err)
-//   console.log(newRoom)
-// })
-// Rooms.create({room:'cats'}, (err, newRoom) => {
-//   if (err) return console.error(err)
-//   console.log(newRoom)
-// })
 
 // Rooms.find(function (err, Room) {
 //   if (err) return console.error(err)
 //   console.log(Room)
 // })
 module.exports = {
-  Rooms: Rooms,
   Msgs: Msgs
 }
