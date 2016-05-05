@@ -11,6 +11,10 @@ var MsgSchema = {
 
 var Msgs = mongoose.model('Msgs', MsgSchema)
 
+/*
+ Uncomment the code below to generate messages.
+*/
+
 // var arrayOfMessages = []
 // for (var i = 0; i < 50000; i++) {
 //   if (i % 3 === 0) {
@@ -25,10 +29,7 @@ var Msgs = mongoose.model('Msgs', MsgSchema)
 //   if (err) console.error(err)
 // })
 
-// Rooms.find(function (err, Room) {
-//   if (err) return console.error(err)
-//   console.log(Room)
-// })
+
 module.exports = {
   Msgs: Msgs
 }
