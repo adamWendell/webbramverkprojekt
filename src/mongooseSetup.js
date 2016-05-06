@@ -29,7 +29,6 @@ var Msgs = mongoose.model('Msgs', MsgSchema)
 //   if (err) console.error(err)
 // })
 
-
 module.exports = {
   Msgs: Msgs
 }
