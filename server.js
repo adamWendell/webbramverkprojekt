@@ -15,7 +15,9 @@ io.on('connection', function (socket) {
   socket.join('general')
   console.log(socket.id)
 
+  // Messages go to the chat route
   socket.on('chat', function (msg) {
+    // AutoCorrect
     msg.message =  msg.message.replace(/angular/gi, 'React')
     msg.room = socket.room
     msg.time = '' + Date.now()
